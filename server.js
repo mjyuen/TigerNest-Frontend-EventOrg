@@ -14,7 +14,7 @@ app.prepare()
         var casURL = 'https://fed.princeton.edu/cas/'
         var cas = new CentralAuthenticationService({
           base_url: casURL,
-          service: "http://localhost:3000" + "/verify"
+          service: "http://tiger-nest2.herokuapp.com" + "/verify"
         })
         server.use(session({
           secret: 'abcdefghijklmnop',
@@ -29,13 +29,13 @@ app.prepare()
                 req.session.redirect = req.query.redirect
               }
           // Redirect the user to the CAS server
-          res.redirect(casURL + 'login?service=' + "http://localhost:3000/verify")
+          res.redirect(casURL + 'login?service=' + "http://tiger-nest2.herokuapp.com/verify")
 
         })
         server.get('/logout', function (req, res) {
           req.session = null
           res.cookie('netid', null)
-          res.redirect(casURL + 'logout?url=http://localhost:3000')
+          res.redirect(casURL + 'logout?url=http://tiger-nest2.herokuapp.com')
         })
         server.get('/verify', function(req, res) {
           // Check if the user has a redirection destination
@@ -108,7 +108,7 @@ app.prepare()
         server.engine('js', require('express-react-views').createEngine()); 
 
             
-        server.listen(3000, (err) => {
+        server.listen(process.env.PORT || 3000, (err) => {
             if (err) {
                 throw err;
             }
