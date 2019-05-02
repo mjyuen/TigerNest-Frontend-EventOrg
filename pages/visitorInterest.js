@@ -63,9 +63,9 @@ class VisitorInterestForm extends React.Component {
     let firstnameInput = document.forms["registerForm"]["firstname"].value;
     let lastnameInput = document.forms["registerForm"]["lastname"].value;
     //let university = document.forms["registerForm"]["university"].value;
-    let event_name = document.forms["registerForm"]["eventname"].value;
+    //let event_name = document.forms["registerForm"]["eventname"].value;
 
-    const res = await fetch('http://localhost:5000/visitor/' + emailInput, {
+    /*const res = await fetch('http://localhost:5000/visitor/' + emailInput, {
         method: "GET",
         headers: {
             'Accept': 'application/json',
@@ -73,7 +73,7 @@ class VisitorInterestForm extends React.Component {
         }, 
         body: JSON.stringify(organizer_info)
       });
-
+    */
     // add eligibility
     // add visitor
 
@@ -103,15 +103,11 @@ class VisitorInterestForm extends React.Component {
     }*/
     
        let organizer_info = {
-        "firstname": firstnameInput,
-        "lastname": lastnameInput,
-        //"password": passwordInput1,
-        "password": "abc",
-        "campus_organizations": "", 
-        "netid": netid,
-        "email": emailInput,
+        "visitor_email": emailInput,
+        "event_id": String(this.state.current_event.event_id),
+        "event_name": String(this.state.current_event.name)
        };
-       /*const res = await fetch('http://localhost:5000/event_organizer', {
+       const res = await fetch('http://localhost:5000/eligibility', {
         method: "POST",
         headers: {
             'Accept': 'application/json',
@@ -119,7 +115,7 @@ class VisitorInterestForm extends React.Component {
         }, 
         body: JSON.stringify(organizer_info)
       });
-       Router.push("/myEvents");*/
+       Router.push("/visitorConfirmation");
 
     }
     toggleDropdown() {
@@ -154,8 +150,8 @@ class VisitorInterestForm extends React.Component {
     return (
   <div>
   <Head title="Event Signup" />
-    <Nav />
     <div className="hero">
+    <link href="https://fonts.googleapis.com/css?family=Maven+Pro" rel="stylesheet" />
 
       <div className="center">
 
@@ -229,6 +225,62 @@ class VisitorInterestForm extends React.Component {
       </div>
 
     </div>
+     <style jsx>{`
+      :global(body) {
+        margin: 0;
+        //background: url("/static/candyBackground.jpg");
+        background: url("/static/background.jpg");
+        //backbround-color: #FFFFFF;
+        //background-color: #1A9788;
+        background-size: cover;
+
+        font-family: 'Maven Pro', sans-serif;
+      }
+      .hero {
+        width: 100%;
+        color: #333;
+      }
+      .title {
+        margin: 0;
+        width: 100%;
+        padding-top: 80px;
+        line-height: 1.15;
+        font-size: 48px;
+      }
+      .title,
+      .description {
+        text-align: center;
+      }
+      .row {
+        max-width: 880px;
+        margin: 80px auto 40px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+      }
+      .card {
+        padding: 18px 18px 24px;
+        width: 220px;
+        text-align: left;
+        text-decoration: none;
+        color: #434343;
+        border: 1px solid #9b9b9b;
+      }
+      .card:hover {
+        border-color: #067df7;
+      }
+      .card h3 {
+        margin: 0;
+        color: #067df7;
+        font-size: 18px;
+      }
+      .card p {
+        margin: 0;
+        padding: 12px 0 0;
+        font-size: 13px;
+        color: #333;
+      }
+    `}</style> 
   </div>)
 
 }
