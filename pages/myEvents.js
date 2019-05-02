@@ -16,7 +16,7 @@ import Cookies from 'js-cookie';
 //const database_url = "http://localhost:5000"
 //const server_url = "http://localhost:3000"
 
-const server_url = "https://tiger-nest2.herokuapp.com"
+const server_url = "http://tiger-nest2.herokuapp.com"
 
 const database_url = "https://tigernest-backend.herokuapp.com"
 
@@ -192,7 +192,7 @@ class eventList extends React.Component {
     let netid = Cookies.get('netid');
     
     //
-    const res = await fetch("http://localhost:5000/getRegCode", {
+    const res = await fetch(database_url + "/getRegCode", {
         method: "GET",
         headers: {
             "Content-Type": "text/plain",
@@ -223,7 +223,7 @@ class eventList extends React.Component {
         "netid": netid,
         "email": emailInput,
        };
-       const res = await fetch('http://localhost:5000/event_organizer', {
+       const res = await fetch(database_url + '/event_organizer', {
         method: "POST",
         headers: {
             'Accept': 'application/json',
@@ -383,7 +383,7 @@ class eventList extends React.Component {
   }
   async addEvent(){
 
-    const res1 = await fetch('http://localhost:5000/event_organizer/netidVerify/' + Cookies.get('netid'), {
+    const res1 = await fetch(database_url + '/event_organizer/netidVerify/' + Cookies.get('netid'), {
             method: "GET",
             headers: {
                 "Content-Type": "text/plain",
