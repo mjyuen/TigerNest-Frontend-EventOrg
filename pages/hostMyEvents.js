@@ -12,9 +12,9 @@ import Cookies from 'js-cookie';
 import Router from 'next/router'
 
 //const database_url = "http://localhost:5000"
-//const database_url = "https://tigernest-backend.herokuapp.com"
+const database_url = "https://tigernest-backend.herokuapp.com"
 
-const server_url = "http://localhost:3000"
+//const server_url = "http://localhost:3000"
 const server_url = "https://tiger-nest2.herokuapp.com"
 
 var divStyle = {
