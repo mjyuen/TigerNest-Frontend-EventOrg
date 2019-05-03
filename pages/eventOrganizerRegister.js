@@ -10,7 +10,9 @@ import Cookies from 'js-cookie';
 import './bootstrap.css';
 
 
+const server_url = "http://tiger-nest2.herokuapp.com"
 
+const database_url = "https://tigernest-backend.herokuapp.com"
 
 class EventOrganizerRegister extends React.Component {
   constructor(props, context){
@@ -35,7 +37,7 @@ class EventOrganizerRegister extends React.Component {
     let netid = Cookies.get('netid');
     
     //
-    const res = await fetch("http://localhost:5000/getRegCode", {
+    const res = await fetch(database_url + "/getRegCode", {
         method: "GET",
         headers: {
             "Content-Type": "text/plain",
@@ -67,7 +69,7 @@ class EventOrganizerRegister extends React.Component {
         "netid": netid,
         "email": emailInput,
        };
-       const res = await fetch('http://localhost:5000/event_organizer', {
+       const res = await fetch(database_url + '/event_organizer', {
         method: "POST",
         headers: {
             'Accept': 'application/json',
