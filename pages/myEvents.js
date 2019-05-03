@@ -16,7 +16,7 @@ import Cookies from 'js-cookie';
 //const database_url = "http://localhost:5000"
 //const server_url = "http://localhost:3000"
 
-const server_url = "http://tiger-nest2.herokuapp.com"
+const server_url = "https://tiger-nest2.herokuapp.com"
 
 const database_url = "https://tigernest-backend.herokuapp.com"
 
