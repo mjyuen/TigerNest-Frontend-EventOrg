@@ -67,7 +67,7 @@ class eventListHost extends React.Component {
       "hosting_organization": document.forms["eventEditForm"]["hostingorg"].value,
       "organizer_id": 1,};
 
-    const res = await fetch('http://localhost:5000/event/update/' + this.state.current_event.event_id, {
+    const res = await fetch(database_url + '/event/update/' + this.state.current_event.event_id, {
         method: "PUT",
         headers: {
             'Accept': 'application/json',
@@ -88,7 +88,7 @@ class eventListHost extends React.Component {
     {
       let val = event.target.value;
     
-      const res = await fetch('http://localhost:5000/event/' + val, {
+      const res = await fetch(database_url + '/event/' + val, {
            method: "GET",
            headers: {
                "Content-Type": "text/plain",                
@@ -130,7 +130,7 @@ class eventListHost extends React.Component {
       "event_name": this.state.current_event.name
       };
 
-    const res = await fetch('http://localhost:5000/pairing', {
+    const res = await fetch(database_url + '/pairing', {
         method: "POST",
         headers: {
             'Accept': 'application/json',
@@ -195,7 +195,7 @@ class eventListHost extends React.Component {
     //console.log(res1.data)
 
      
-        const res = await fetch('http://localhost:5000/event/sort_date', {
+        const res = await fetch(database_url + '/event/sort_date', {
             method: "GET",
             headers: {
                 "Content-Type": "text/plain",

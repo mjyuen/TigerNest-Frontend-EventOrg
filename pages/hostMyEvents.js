@@ -12,7 +12,10 @@ import Cookies from 'js-cookie';
 import Router from 'next/router'
 
 //const database_url = "http://localhost:5000"
-const database_url = "https://tigernest-backend.herokuapp.com"
+//const database_url = "https://tigernest-backend.herokuapp.com"
+
+const server_url = "http://localhost:3000"
+const server_url = "https://tiger-nest2.herokuapp.com"
 
 var divStyle = {
   color: 'white'
@@ -110,7 +113,7 @@ class eventListHost extends React.Component {
       "hosting_organization": document.forms["eventEditForm"]["hostingorg"].value,
       "organizer_id": 1,};
 
-    const res = await fetch('http://localhost:5000/event/update/' + this.state.current_event.event_id, {
+    const res = await fetch(database_url + '/event/update/' + this.state.current_event.event_id, {
         method: "POST",
         headers: {
             'Accept': 'application/json',
@@ -131,7 +134,7 @@ class eventListHost extends React.Component {
     {
       let val = event.target.value;
     
-      const res = await fetch('http://localhost:5000/pairing/' + val, {
+      const res = await fetch(database_url + '/pairing/' + val, {
            method: "GET",
            headers: {
                "Content-Type": "text/plain",                
@@ -161,7 +164,7 @@ class eventListHost extends React.Component {
     {
       let val = event.target.value;
     
-      const res = await fetch('http://localhost:5000/pairing/' + val, {
+      const res = await fetch(database_url + '/pairing/' + val, {
            method: "GET",
            headers: {
                "Content-Type": "text/plain",                
@@ -185,7 +188,7 @@ class eventListHost extends React.Component {
   }
   async dropEvent(){
 
-     const res = await fetch('http://localhost:5000/pairing/delete/' + this.state.current_pairing.pairing_id, {
+     const res = await fetch(database_url + '/pairing/delete/' + this.state.current_pairing.pairing_id, {
         method: "DELETE",
         headers: {
             'Accept': 'application/json',
@@ -212,7 +215,7 @@ class eventListHost extends React.Component {
       "event_id": this.state.current_event.event_id
       };
 
-    const res = await fetch('http://localhost:5000/pairing/update/' + this.state.current_pairing.pairing_id, {
+    const res = await fetch(database_url + '/pairing/update/' + this.state.current_pairing.pairing_id, {
         method: "POST",
         headers: {
             'Accept': 'application/json',
@@ -247,7 +250,7 @@ class eventListHost extends React.Component {
   {
     var netid = String(Cookies.get('netid'));
 
-    const res = await fetch('http://localhost:5000/pairing/events_for_host/' + netid, {
+    const res = await fetch(database_url + '/pairing/events_for_host/' + netid, {
             method: "GET",
             headers: {
                 "Content-Type": "text/plain",
@@ -296,13 +299,13 @@ class eventListHost extends React.Component {
      //console.log(data)
 
      const res1 = await axios({
-        url: 'http://localhost:3000/netid',
+        url: server_url + 'netid',
         // manually copy cookie on server,
         // let browser handle it automatically on client
         headers: req ? {cookie: req.headers.cookie} : undefined,
       });
 
-     const res = await fetch('http://localhost:5000/pairing/events_for_host/' + res1.data.netid, {
+     const res = await fetch(database_url + '/pairing/events_for_host/' + res1.data.netid, {
             method: "GET",
             headers: {
                 "Content-Type": "text/plain",
