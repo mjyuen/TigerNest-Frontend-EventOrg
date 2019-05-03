@@ -498,7 +498,7 @@ class eventList extends React.Component {
     } 
 
     const res1 = await axios({
-        url: 'http://localhost:3000/netid',
+        url: server_url + '/netid',
         // manually copy cookie on server,
         // let browser handle it automatically on client
         headers: req ? {cookie: req.headers.cookie} : undefined,
