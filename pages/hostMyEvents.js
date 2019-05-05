@@ -36,6 +36,10 @@ class eventListHost extends React.Component {
       eventList: [],
       viewDetailsModal: false,
       visitor_list: [],
+      male_true: "", 
+      female_true: "",
+      same_gender_yes: "",
+      same_gender_no: "",
       current_event: { 
         name:"",
         start_time:"",
@@ -83,7 +87,7 @@ class eventListHost extends React.Component {
         var dataVisitor = await resVisitor.json()
         dataVisitor = JSON.stringify(dataVisitor)
         dataVisitor = JSON.parse(dataVisitor)
-        visitornames.push(String(data[i]['name']))
+        visitornames.push(String(dataVisitor[i]['name']))
       }
   
       //data = JSON.stringify(data);
@@ -174,6 +178,26 @@ class eventListHost extends React.Component {
       data = JSON.stringify(data)
       data = JSON.parse(data)
       this.setState(state => ({ current_pairing: data}));
+      if (String(data['host_gender']) === "Male")
+      {
+        this.setState(state => ({ male_true: "true"}));
+        this.setState(state => ({ female_true: "false"}));
+      }
+      else
+      {
+        this.setState(state => ({ female_true: "true"}));
+        this.setState(state => ({ male_true: "false"}));
+      }
+      if ((data['same_gender_room']))
+      {
+        this.setState(state => ({ same_gender_yes: "true"}));
+        this.setState(state => ({ same_gender_no: "false"}));
+      }
+      else
+      {
+        this.setState(state => ({ same_gender_no: "true"}));
+        this.setState(state => ({ same_gender_yes: "false"}));
+      }
     }
 
       //console.log(data);
@@ -385,7 +409,7 @@ class eventListHost extends React.Component {
           <Form id="hostSignupForm">
           <Row>
           <Col>
-          First Name
+          First Name:
           </Col>
           <Col>
           <Input type="text" name="firstname" id="firstname" defaultValue={this.state.current_pairing.host_first_name}/ >  
@@ -394,7 +418,7 @@ class eventListHost extends React.Component {
           <br />
           <Row>
           <Col>
-          Last Name
+          Last Name:
           </Col>
           <Col>
           <Input type="text" name="lastname" id="lastname" defaultValue={this.state.current_pairing.host_last_name}/>  
@@ -403,7 +427,7 @@ class eventListHost extends React.Component {
           <br />
           <Row>
           <Col>
-          Room Number 
+          Room Number: 
           </Col>
           <Col>
           <Input type="text" name="roomnum" id="roomnum" defaultValue={this.state.current_pairing.host_room_num}/>
@@ -433,13 +457,13 @@ class eventListHost extends React.Component {
           <Col> 
           <FormGroup check>
               <Label check>
-                <Input type="radio" name="radio2" id="radio2" value="Male"/>{' '}
+                <Input type="radio" name="radio2" id="radio2" value="Male" defaultChecked={this.state.male_true}/>{' '}
                 Male
               </Label>
             </FormGroup>
             <FormGroup check>
               <Label check>
-                <Input type="radio" name="radio2" id="radio2" value="Female"/>{' '}
+                <Input type="radio" name="radio2" id="radio2" value="Female" defaultChecked={this.state.female_true}/>{' '}
                 Female
               </Label>
             </FormGroup>
@@ -451,13 +475,13 @@ class eventListHost extends React.Component {
           <Col>
           <FormGroup check>
               <Label check>
-                <Input type="radio" name="radio1" id="radio1" value="yes"/>{' '}
+                <Input type="radio" name="radio1" id="radio1" value="yes" defaultChecked={this.state.same_gender_yes}/>{' '}
                 Yes
               </Label>
             </FormGroup>
             <FormGroup check>
               <Label check>
-                <Input type="radio" name="radio1" id="radio1" value="no"/>{' '}
+                <Input type="radio" name="radio1" id="radio1" value="no" defaultChecked={this.state.same_gender_no}/>{' '}
                 No
               </Label>
             </FormGroup>
