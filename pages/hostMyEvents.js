@@ -36,10 +36,10 @@ class eventListHost extends React.Component {
       eventList: [],
       viewDetailsModal: false,
       visitor_list: [],
-      male_true: "", 
-      female_true: "",
-      same_gender_yes: "",
-      same_gender_no: "",
+      male_true: false, 
+      female_true: false,
+      same_gender_yes: false,
+      same_gender_no: false,
       current_event: { 
         name:"",
         start_time:"",
@@ -180,23 +180,23 @@ class eventListHost extends React.Component {
       this.setState(state => ({ current_pairing: data}));
       if (String(data['host_gender']) === "Male")
       {
-        this.setState(state => ({ male_true: "true"}));
-        this.setState(state => ({ female_true: "false"}));
+        this.setState(state => ({ male_true: true}));
+        this.setState(state => ({ female_true: false}));
       }
       else
       {
-        this.setState(state => ({ female_true: "true"}));
-        this.setState(state => ({ male_true: "false"}));
+        this.setState(state => ({ female_true: true}));
+        this.setState(state => ({ male_true: false}));
       }
       if ((data['same_gender_room']))
       {
-        this.setState(state => ({ same_gender_yes: "true"}));
-        this.setState(state => ({ same_gender_no: "false"}));
+        this.setState(state => ({ same_gender_yes: true}));
+        this.setState(state => ({ same_gender_no: false}));
       }
       else
       {
-        this.setState(state => ({ same_gender_no: "true"}));
-        this.setState(state => ({ same_gender_yes: "false"}));
+        this.setState(state => ({ same_gender_no: true}));
+        this.setState(state => ({ same_gender_yes: false}));
       }
     }
 
