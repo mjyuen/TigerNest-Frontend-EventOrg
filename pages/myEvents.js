@@ -667,9 +667,6 @@ class eventList extends React.Component {
           Please add a brief description of the event: <Input type="textarea" name="description" id="description" /> 
           <br />   
           </Form>  
-          <ReactFileReader handleFiles={this.handleFiles} fileTypes={'.csv'}>
-              <button id="visitorList" name="visitorList" className='btn'>Upload</button>
-          </ReactFileReader>
           
           </ModalBody>
           <ModalFooter>
