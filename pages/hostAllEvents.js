@@ -111,16 +111,38 @@ class eventListHost extends React.Component {
 
   }
   async addHost(){
-    //let name = document.forms["eventCreateForm"]["eventname"].value;
-    //console.log(name)
-    let genderVal = document.forms["hostSignupForm"]["radio1"].value;
-    let same_gender = genderVal === "Yes" ? true : false;
+
+    let genderVal = ""
+    let host_gender = ""
+
+    try {
+      genderVal = document.forms["hostSignupForm"]["radio1"].value;
+      host_gender = document.forms["hostSignupForm"]["radio2"].value;
+    } 
+    catch(err) {
+      alert("All fields are required");
+      return;
+    }
+
+    if (document.forms["hostSignupForm"]["firstname"].value === "" || document.forms["hostSignupForm"]["lastname"].value === "" || document.forms["hostSignupForm"]["roomnum"].value === "" || document.forms["hostSignupForm"]["maxvisitors"].value === "" || document.forms["hostSignupForm"]["cellnum"].value === "")
+    {
+      alert("All fields are required");
+      return;
+    }
+
+    if (isNaN(parseInt((document.forms["hostSignupForm"]["maxvisitors"].value))))
+    {
+      alert("Max Visitors must be an integer!");
+      return;
+    }
+
+    let same_gender = genderVal === "yes" ? true : false;
     //console.log(this.state.visitorEmails)
     let pairingInfo = {
       "host_first_name": document.forms["hostSignupForm"]["firstname"].value,
       "host_last_name": document.forms["hostSignupForm"]["lastname"].value,
       "host_netid": String(Cookies.get('netid')),
-      "host_gender": document.forms["hostSignupForm"]["radio2"].value,
+      "host_gender": host_gender,
       "same_gender_room": same_gender,
       "host_room_num": document.forms["hostSignupForm"]["roomnum"].value,
       "max_visitors": document.forms["hostSignupForm"]["maxvisitors"].value,

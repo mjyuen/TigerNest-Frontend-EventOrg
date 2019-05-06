@@ -248,6 +248,17 @@ class eventList extends React.Component {
   async editEvent(){
     //console.log(this.state.visitorEmails)
     //console.log(document.cookie)
+     if (document.forms["eventEditForm"]["eventname"].value === "" || document.forms["eventEditForm"]["starttime"].value === "" || document.forms["eventEditForm"]["startdate"].value === "" || document.forms["eventEditForm"]["endtime"].value === "" || document.forms["eventEditForm"]["enddate"].value === "" || document.forms["eventEditForm"]["description"].value === "" || document.forms["eventEditForm"]["location"].value === "" || document.forms["eventEditForm"]["expectednum"].value === "" || document.forms["eventEditForm"]["hostingorg"].value === "")
+    {
+      alert("All fields are required!");
+      return;
+    }
+    if (isNaN(parseInt(document.forms["eventEditForm"]["expectednum"].value)))
+    {
+      alert("Expected number of visitors must be an integer!");
+      return;
+    }
+    
     let eventInfo = {
       "name": document.forms["eventEditForm"]["eventname"].value,
       "start_time": document.forms["eventEditForm"]["starttime"].value,
@@ -383,6 +394,17 @@ class eventList extends React.Component {
   }
   async addEvent(){
 
+    if (document.forms["eventCreateForm"]["eventname"].value === "" || document.forms["eventCreateForm"]["starttime"].value === "" || document.forms["eventCreateForm"]["startdate"].value === "" || document.forms["eventCreateForm"]["endtime"].value === "" || document.forms["eventCreateForm"]["enddate"].value === "" || document.forms["eventCreateForm"]["description"].value === "" || document.forms["eventCreateForm"]["location"].value === "" || document.forms["eventCreateForm"]["expectednum"].value === "" || document.forms["eventCreateForm"]["hostingorg"].value === "")
+    {
+      alert("All fields are required!");
+      return;
+    }
+    if (isNaN(parseInt(document.forms["eventCreateForm"]["expectednum"].value)))
+    {
+      alert("Expected number of visitors must be an integer!");
+      return;
+    }
+
     const res1 = await fetch(database_url + '/event_organizer/netidVerify/' + Cookies.get('netid'), {
             method: "GET",
             headers: {
@@ -443,8 +465,6 @@ class eventList extends React.Component {
     var netid = String(Cookies.get('netid'));
 
 
-    //console.log(netid);
-
     const session_current_organizer = await fetch(database_url + '/event_organizer/netidVerify/' + netid, {
             method: "GET",
             headers: {
@@ -456,7 +476,6 @@ class eventList extends React.Component {
     var resp = await session_current_organizer.json();
     resp = JSON.stringify(resp);
 
-    //console.log(resp);
 
     if (String(resp) === "{}")
     {
@@ -465,9 +484,6 @@ class eventList extends React.Component {
       Router.push('/eventOrganizerRegister')
 
     } 
-
-    //return verified;
-    
 
   } 
   static async getInitialProps({req}){
