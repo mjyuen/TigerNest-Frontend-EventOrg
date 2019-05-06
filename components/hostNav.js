@@ -28,7 +28,7 @@ const NavHost = () => (
 
     <ul>
       <li>
-        <Link href="/home">
+        <Link href="https://tiger-nest.herokuapp.com">
           <a>Home</a>
         </Link>
       </li>
@@ -40,11 +40,6 @@ const NavHost = () => (
       <li>
         <Link href="/hostMyEvents">
           <a>My Events</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/about">
-          <a>My Account</a>
         </Link>
       </li>
       <li>
