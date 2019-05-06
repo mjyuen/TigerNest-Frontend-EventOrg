@@ -58,6 +58,10 @@ class eventListHost extends React.Component {
     this.dropEvent = this.dropEvent.bind(this);
     this.filterEvents = this.filterEvents.bind(this);
     this.viewDetailsToggle = this.viewDetailsToggle.bind(this);
+    this.refreshPage = this.refreshPage.bind(this);
+  }
+  refreshPage(){
+    window.location.reload(); 
   }
   async viewDetailsToggle(){
     if (!this.state.viewDetailsModal)
@@ -127,6 +131,7 @@ class eventListHost extends React.Component {
     });
 
     this.editModalToggle();
+    this.refreshPage();
 
 
   }
@@ -221,6 +226,7 @@ class eventListHost extends React.Component {
     });
 
      this.dropEventToggle();
+     this.refreshPage();
   }
   async addHost(){
     //let name = document.forms["eventCreateForm"]["eventname"].value;
@@ -275,6 +281,7 @@ class eventListHost extends React.Component {
 
 
     this.addHostToggle();
+    this.refreshPage();
   }
   handleFiles = files => {
     var reader = new FileReader();

@@ -49,6 +49,10 @@ class eventListHost extends React.Component {
     this.addHost = this.addHost.bind(this);
     this.editEvent = this.editEvent.bind(this);
     this.handleFiles = this.handleFiles.bind(this);
+    this.refreshPage = this.refreshPage.bind(this);
+  }
+  refreshPage(){
+    window.location.reload(); 
   }
   async editEvent(){
     console.log(this.state.visitorEmails)
@@ -77,6 +81,7 @@ class eventListHost extends React.Component {
     });
 
     this.editModalToggle();
+    this.refreshPage();
 
 
   }
@@ -163,6 +168,7 @@ class eventListHost extends React.Component {
 
 
     this.addHostToggle();
+    this.refreshPage();
     //this.getInitialProps();
   }
   handleFiles = files => {

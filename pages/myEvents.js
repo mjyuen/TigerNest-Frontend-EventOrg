@@ -82,6 +82,7 @@ class eventList extends React.Component {
     this.finalizePairings = this.finalizePairings.bind(this);
     this.finalizePairingsToggle = this.finalizePairingsToggle.bind(this);
     this.viewDetailsToggle = this.viewDetailsToggle.bind(this);
+    this.refreshPage = this.refreshPage.bind(this);
     //this.verifyUser = this.verifyUser.bind(this);
   }
   toggleTab(tab){
@@ -90,6 +91,9 @@ class eventList extends React.Component {
         activeTab: tab
       });
     }
+  }
+  refreshPage(){ 
+    window.location.reload(); 
   }
   async beginVisitorSignup(){
     const res = await fetch(database_url + '/event/stage/visitor_signup/' + this.state.current_event.event_id, {
@@ -100,6 +104,7 @@ class eventList extends React.Component {
         }
     });
     this.visitorSignupToggle();
+    this.refreshPage();
 
   }
   async finalizePairings(){
@@ -111,6 +116,7 @@ class eventList extends React.Component {
         }
     });
     this.finalizePairingsToggle();
+    this.refreshPage();
 
   }
   async viewDetailsToggle(){
@@ -233,6 +239,7 @@ class eventList extends React.Component {
       });
        Router.push("/eventOrganizerLogin");
     }
+    this.refreshPage();
   }
   async deleteEvent(){
     const res = await fetch(database_url + '/event/delete/' + this.state.current_event.event_id, {
@@ -243,6 +250,7 @@ class eventList extends React.Component {
         }
     });
     this.deleteModalToggle();
+    this.refreshPage();
 
   }
   async editEvent(){
@@ -258,7 +266,7 @@ class eventList extends React.Component {
       alert("Expected number of visitors must be an integer!");
       return;
     }
-    
+
     let eventInfo = {
       "name": document.forms["eventEditForm"]["eventname"].value,
       "start_time": document.forms["eventEditForm"]["starttime"].value,
@@ -284,6 +292,7 @@ class eventList extends React.Component {
     });
 
     this.editModalToggle();
+    this.refreshPage();
 
 
   }
@@ -382,14 +391,11 @@ class eventList extends React.Component {
       this.setState(state => ({ current_event: data}));
     }
 
-      //console.log(data);
-
     
     this.setState(prevState => ({
       editModal: !prevState.editModal
     }));
-    
-
+  
 
   }
   async addEvent(){
@@ -440,6 +446,7 @@ class eventList extends React.Component {
     });
 
     this.toggle();
+    this.refreshPage();
   }
   handleFiles = files => {
     var reader = new FileReader();

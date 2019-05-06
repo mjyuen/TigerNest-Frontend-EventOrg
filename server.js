@@ -35,7 +35,7 @@ app.prepare()
         server.get('/logout', function (req, res) {
           req.session = null
           res.cookie('netid', null)
-          res.redirect(casURL + 'logout?url=http://tiger-nest2.herokuapp.com')
+          res.redirect(casURL + 'logout?url=http://tiger-nest.herokuapp.com')
         })
         server.get('/verify', function(req, res) {
           // Check if the user has a redirection destination
@@ -80,10 +80,10 @@ app.prepare()
             res.send({netid: req.session.cas.netid});
             //console.log("yeeeeeeeeeeeet");
           }
-          else res.redirect("/login?redirect=/myEvents")
+          else res.redirect("/login?redirect=/")
         })        
         server.get('/', function (req, res) {
-            return handle(req, res);
+            res.redirect("https://tiger-nest.herokuapp.com")
         })
 
         server.get('*/bootstrap.css', 
@@ -100,7 +100,7 @@ app.prepare()
             if (req.session.cas){
                 return handle(req, res);
             }
-            res.redirect("/login?redirect=/myEvents")            
+            res.redirect("/login?redirect=/")            
         }) 
 
         server.set('views', '/views');
@@ -112,7 +112,7 @@ app.prepare()
             if (err) {
                 throw err;
             }
-            console.log('> Ready on http://localhost:3000');
+            //console.log('> Ready on http://localhost:3000');
         });
 
     })
