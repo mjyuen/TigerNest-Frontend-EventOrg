@@ -185,18 +185,6 @@ class eventListHost extends React.Component {
       data = JSON.parse(data)
       this.setState(state => ({ current_pairing: data}));
 
-      res = fetch(database_url + '/event/' + data['event_id'], {
-           method: "GET",
-           headers: {
-               "Content-Type": "text/plain",                
-               "Access-Control-Allow-Origin": "*"
-        }})
-
-      data1 = res.json()
-      data1 = JSON.stringify(data1)
-      data1 = JSON.parse(data1)
-
-      this.setState(state => ({ current_event_name: String(data1['name'])}));
 
       if (String(data['host_gender']) === "Male")
       {
@@ -582,7 +570,7 @@ class eventListHost extends React.Component {
           }
           return <div>
                  <tr key={index}>
-                 <th key="0"> Event Name: {this.state.current_event_name} </th> 
+                 <th key="0"> Event Name: {jsonVal['event_name']} </th> 
                  <th key="3"> Maximum Visitors: {jsonVal['max_visitors']} </th>  
                  <th key="6"> Cellphone: {jsonVal['host_cellphone']} </th>    
                  <br />         
