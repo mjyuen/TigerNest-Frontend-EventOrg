@@ -40,6 +40,7 @@ class eventListHost extends React.Component {
       female_true: false,
       same_gender_yes: false,
       same_gender_no: false,
+      current_event_name: "",
       current_event: { 
         name:"",
         start_time:"",
@@ -91,7 +92,7 @@ class eventListHost extends React.Component {
         var dataVisitor = await resVisitor.json()
         dataVisitor = JSON.stringify(dataVisitor)
         dataVisitor = JSON.parse(dataVisitor)
-        visitornames.push(String(dataVisitor[i]['name']))
+        visitornames.push(String(dataVisitor['name'] + "\n"))
       }
   
       //data = JSON.stringify(data);
@@ -183,6 +184,20 @@ class eventListHost extends React.Component {
       data = JSON.stringify(data)
       data = JSON.parse(data)
       this.setState(state => ({ current_pairing: data}));
+
+      res = fetch(database_url + '/event/' + data['event_id'], {
+           method: "GET",
+           headers: {
+               "Content-Type": "text/plain",                
+               "Access-Control-Allow-Origin": "*"
+        }})
+
+      data1 = res.json()
+      data1 = JSON.stringify(data1)
+      data1 = JSON.parse(data1)
+
+      this.setState(state => ({ current_event_name: String(data1['name'])}));
+
       if (String(data['host_gender']) === "Male")
       {
         this.setState(state => ({ male_true: true}));
@@ -567,12 +582,8 @@ class eventListHost extends React.Component {
           }
           return <div>
                  <tr key={index}>
-                 <th key="0"> Event Name: {jsonVal['event_name']} </th> 
-                 <th key="1"> Your gender: {jsonVal['host_gender']} </th>
-                 <th key="2"> Same Gender Room: {(jsonVal['same_gender_room'])} </th>
-                 <th key="3"> Maximum Visitors: {jsonVal['max_visitors']} </th>
-                 <th key="4"> First Name: {jsonVal['host_first_name']} </th>
-                 <th key="5"> Last Name: {jsonVal['host_last_name']} </th>  
+                 <th key="0"> Event Name: {this.state.current_event_name} </th> 
+                 <th key="3"> Maximum Visitors: {jsonVal['max_visitors']} </th>  
                  <th key="6"> Cellphone: {jsonVal['host_cellphone']} </th>    
                  <br />         
                   <th> <Button color="light" key="8" value={jsonVal['pairing_id']} onClick={this.addHostToggle} size="sm" > Edit Information </Button> </th>

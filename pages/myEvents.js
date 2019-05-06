@@ -172,7 +172,7 @@ class eventList extends React.Component {
         dataHost = JSON.stringify(dataHost)
         dataHost = JSON.parse(dataHost)
 
-        let pairing_info = String("Host: " + dataHost['host_first_name'] + " " + dataHost['host_last_name'] + ", Visitor: " + dataVisitor['name'])
+        let pairing_info = String("Host: " + dataHost['host_first_name'] + " " + dataHost['host_last_name'] + ", Visitor: " + dataVisitor['name'] + "\n")
         pairingList.push(pairing_info)
       }
   
